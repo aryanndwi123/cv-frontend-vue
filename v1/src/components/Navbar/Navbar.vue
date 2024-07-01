@@ -10,7 +10,7 @@
                 id="projectName"
                 class="projectName noSelect defaultCursor font-weight-bold"
             >
-                {{ projectStore.getProjectName }}
+                {{ projectStore.getProjectName }} v1
             </span>
             <User :user-data="userDropdownItems" />
         </div>
