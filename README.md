@@ -4,6 +4,135 @@
 
 # CircuitVerse Frontend Vue
 [CircuitVerse Frontend Vue](https://circuitverse.netlify.app/simulatorvue) is dedicated to enhancing the CircuitVerse platform in several key ways. Our primary focus is on decoupling the [CircuitVerse Simulator](https://circuitverse.org/simulator) from the backend, allowing it to function independently and with greater flexibility. Additionally, we're working to remove the reliance on jQueryUI, opting for cleaner and more contemporary code practices. To improve performance and code readability, we're transitioning from traditional DOM mutations to string-based manipulation. Furthermore, we're actively integrating internationalization features to ensure the platform is accessible to users worldwide. In summary, our repository aims to elevate the capabilities and user experience of CircuitVerse through targeted improvements and optimizations.
+## Project Versions and Contribution Guidelines
+
+### Version Management
+
+CircuitVerse Frontend Vue is organized into multiple versions to support different development stages:
+
+#### v0 (Current Stable Version)
+- Located in `/v0/src/`
+- Primary development focus
+- Recommended for most contributors
+
+#### v1 (Experimental/Future Version)
+- Located in `/src/`
+- For advanced features and experimental developments
+- Requires specific configuration changes
+
+### Switching Between Versions
+
+#### For v0 Contributors
+Work in the `/v0/src/` directory and use the following configurations:
+
+**index.html**:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <title>CircuitVerse</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/v0/src/main.ts"></script>
+</body>
+</html>
+```
+
+**vite.config.ts**:
+```typescript
+export default defineConfig(() => ({
+  plugins: [
+    vue(),
+    vuetify({ autoImport: true }),
+    vueI18n({
+      include: fileURLToPath(
+        new URL(`./v0/src/locales/**`, import.meta.url)
+      ),
+    }),
+  ],
+  resolve: {
+    alias: {
+      '#': fileURLToPath(new URL(`./v0/src`, import.meta.url)),
+      '@': fileURLToPath(new URL(`./v0/src/components`, import.meta.url)),
+    },
+  },
+  base: process.env.DESKTOP_MODE ? '/' : '/simulatorvue/',
+  build: {
+    outDir: process.env.DESKTOP_MODE ? './dist' : '../public/simulatorvue/v0/',
+    assetsDir: 'assets',
+    chunkSizeWarningLimit: 1600,
+  },
+  // ... additional configuration
+}))
+```
+
+#### For v1 Contributors
+Work in the `/src/` directory and use the following configurations:
+
+**index.html**:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <title>CircuitVerse</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
+```
+
+**vite.config.ts**:
+```typescript
+export default defineConfig(() => ({
+  plugins: [
+    vue(),
+    vuetify({ autoImport: true }),
+    vueI18n({
+      include: fileURLToPath(
+        new URL(`./src/locales/**`, import.meta.url)
+      ),
+    }),
+  ],
+  resolve: {
+    alias: {
+      '#': fileURLToPath(new URL(`./src`, import.meta.url)),
+      '@': fileURLToPath(new URL(`./src/components`, import.meta.url)),
+    },
+  },
+  base: process.env.DESKTOP_MODE ? '/' : '/simulatorvue/',
+  build: {
+    outDir: process.env.DESKTOP_MODE ? './dist' : '../public/simulatorvue/',
+    assetsDir: 'assets',
+    chunkSizeWarningLimit: 1600,
+  },
+  // ... additional configuration
+}))
+```
+
+### Contribution Focus
+
+#### v0 Priorities
+- Mobile version development
+- Testing and bug fixing
+- Maintaining current stable features
+- Typescript integration
+- Style refactoring
+- Removing jQuery dependencies
+
+#### v1 Priorities
+- Desktop application development
+
 
 ## Community
 We would love to hear from you! We communicate on Slack:
