@@ -114,8 +114,7 @@ async function fetchProjectData(projectId) {
             const projectName = data.name
             if(!simulatorVersion){                 
                 window.location.href = `/simulator/edit/${projectName}`             
-            }           
-            if(simulatorVersion && simulatorVersion != "v0"){                 
+            }else if(simulatorVersion != "v0"){                 
                 window.location.href = `/simulatorvue/edit/${projectName}?simver=${simulatorVersion}`             
             }
             await load(data)
